@@ -1,0 +1,23 @@
+version: '2.0'
+services: 
+  application_server:
+    build: . 
+    volumes:
+      - /run/php/
+      - /var/www/html
+    ports:
+      - 9000:9000
+
+
+  web_server:
+    build: nginx/.
+    volumes:
+      - /var/www/html
+    volumes_from:
+      - application_server
+    ports:
+      - "99:80"
+    links:
+      - application_server
+
+  
