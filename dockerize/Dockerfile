@@ -9,7 +9,7 @@ RUN sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php/7.0/fpm
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php
 RUN mkdir /run/php
-RUN echo "< ?php phpinfo(); ? > " > /run/php/index.php
+RUN echo "<?php phpinfo(); ?> " > /run/php/index.php
 RUN apt-get remove -y
 RUN apt-get clean
 RUN rm -rf /var/list/apt/lists
