@@ -1,0 +1,8 @@
+RewriteEngine on
+
+RewriteRule ^/?$ Templates/contacts.php
+RewriteRule ^add$ View/add.html
+RewriteRule ^edit$ View/edit.php
+RewriteRule ^create$ Controller/controller.php
+RewriteRule ^delete$ Controller/controller.php
+RewriteRule ^update$ Controller/controller.php

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="crudmvc">
+    <serverData>
+      <paths name="crudmvc">
+        <serverdata>
+          <mappings>
+            <mapping deploy="crudmvc" local="$PROJECT_DIR$" web="/crudmvc" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
