@@ -1,20 +1,16 @@
 <?php
-include('../Model/user.php');
+include('../Service/service.php');
 
 
 class controller{
-    public $model;
+    public $service;
     public $fname;
     public $lname;
     public $id;
 
 
     public function __construct(){
-        $this->model = new User();
-    }
-
-    public function redirect($location){
-        header('Location:'.$location);
+        $this->service = new Service();
     }
 
     public function handleRequest(){
@@ -29,34 +25,33 @@ class controller{
     }
 
     public function liste(){
-        $list = $this->model->read();
+        $list = $this->service->read();
         return $list;
     }
 
     public function add(){
+           $user=[];
+           $user[0]=$_POST["fname"];
+           $user[1]=$_POST['lname'];
+           $this->service->userSave($user);
 
-           $this->fname = $_POST['fname'];
-           $this->lname = $_POST['lname'];
-           $this->model->create($this->fname,$this->lname);
-           $this->redirect("http://localhost:81/CRUD-MVC/");
         return true;
     }
     public function update(){
 
-
-            $this->id = $_POST['userid'];
-            $this->fname = $_POST['fname'];
-            $this->lname = $_POST['lname'];
-            $this->model->update($this->id,$this->fname,$this->lname);
-        $this->redirect("http://localhost:81/CRUD-MVC/");
+            $user=[];
+            $user[0]=$_POST['userid'];
+            $user[1]=$_POST['fname'];
+            $user[2]=$_POST['lname'];
+            $this->service->update($user);
 
         return true;
     }
 
     public function delete(){
-            $this->id = $_GET['id'];
-            $this->model->delete($this->id);
-        $this->redirect("http://localhost:81/CRUD-MVC/");
+            $user = [];
+            $user[0] = $_GET['id'];
+            $this->service->delete($user);
 
         return true;
     }

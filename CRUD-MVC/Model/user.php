@@ -17,11 +17,10 @@ class User{
         $this->conn = new Config();
     }
 
-    public function create($fname,$lname){
+    public function create($user){
 
-
-        $this->fname = $fname;
-        $this->lname = $lname;
+        $this->fname = $user[0];
+        $this->lname = $user[1];
 
         $stmt = $this->conn->getConnection()->prepare("INSERT INTO ".$this->table_name. "(fname,lname) VALUES(?,?)");
 
@@ -35,9 +34,9 @@ class User{
         }
     }
 
-    function delete($id){
+    function delete($user){
 
-        $this->id = $id;
+        $this->id = $user[0];
 
         $stmt = $this->conn->getConnection()->prepare("DELETE FROM $this->table_name WHERE u_id=?");
 
@@ -62,11 +61,12 @@ class User{
 
 
 
-    function update($id,$fname,$lname){
+    function update($user){
 
-        $this->id = $id;
-        $this->fname = $fname;
-        $this->lname = $lname;
+        $this->id=$user[0];
+        $this->fname = $user[1];
+        $this->lname = $user[2];
+
 
         $stmt = $this->conn->getConnection()->prepare( "UPDATE $this->table_name SET fname = ?, lname=? WHERE u_id= ?");
 
