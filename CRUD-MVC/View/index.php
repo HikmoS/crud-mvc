@@ -1,7 +1,6 @@
 <?php
 include("../Controller/controller.php");
 $cont = new controller();
-
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +38,8 @@ $cont = new controller();
         <tbody>
 
         <?php
-        $list = $cont->liste();
-        foreach ($list as $row){
+        foreach ($cont->liste() as $row){
+
             ?>
             <tr>
                 <td><?php echo $row['u_id'];?></td>
@@ -56,6 +55,5 @@ $cont = new controller();
 
     </table>
 </div>
-
 </body>
 </html>

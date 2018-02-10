@@ -4,13 +4,15 @@ include('../Service/service.php');
 
 class controller{
     public $service;
+    public $id;
     public $fname;
     public $lname;
-    public $id;
 
 
-    public function __construct(){
-        $this->service = new Service();
+
+    public function controllerObje()
+    {
+        return $this->service = new Service();
     }
 
     public function handleRequest(){
@@ -25,44 +27,40 @@ class controller{
     }
 
     public function liste(){
-        $list = $this->service->read();
+        $list = $this->controllerObje()->read();
         return $list;
+
     }
 
     public function add(){
-           $user=[];
-           $user[0]=$_POST["fname"];
-           $user[1]=$_POST['lname'];
-           $this->service->userSave($user);
+
+           $this->fname=$_POST["fname"];
+           $this->lname=$_POST['lname'];
+           $this->controllerObje()->userSave($this->fname,$this->lname);
 
         return true;
     }
     public function update(){
 
-            $user=[];
-            $user[0]=$_POST['userid'];
-            $user[1]=$_POST['fname'];
-            $user[2]=$_POST['lname'];
-            $this->service->update($user);
+            $this->id=$_POST['userid'];
+            $this->fname=$_POST['fname'];
+            $this->lname=$_POST['lname'];
+            $this->controllerObje()->update($this->id,$this->fname,$this->lname);
 
         return true;
     }
 
     public function delete(){
-            $user = [];
-            $user[0] = $_GET['id'];
-            $this->service->delete($user);
+            $this->id = $_GET['id'];
+            $this->controllerObje()->delete($this->id);
 
         return true;
     }
-
 
 }
 
 $cont = new controller();
 $cont->handleRequest();
-
-
 
 
 ?>

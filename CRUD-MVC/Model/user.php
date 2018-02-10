@@ -13,16 +13,17 @@ class User{
 
 
 
-    public function __construct(){
+    public function modelObje(){
         $this->conn = new Config();
+        return $this->conn->getConnection();
     }
 
-    public function create($user){
+    public function create($fname,$lname){
 
-        $this->fname = $user[0];
-        $this->lname = $user[1];
+        $this->fname = $fname;
+        $this->lname = $lname;
 
-        $stmt = $this->conn->getConnection()->prepare("INSERT INTO ".$this->table_name. "(fname,lname) VALUES(?,?)");
+        $stmt = $this->modelObje()->prepare("INSERT INTO ".$this->table_name. "(fname,lname) VALUES(?,?)");
 
         $stmt->bindParam(1, $this->fname);
         $stmt->bindParam(2, $this->lname);
@@ -34,11 +35,11 @@ class User{
         }
     }
 
-    function delete($user){
+    function delete($id){
 
-        $this->id = $user[0];
+        $this->id = $id;
 
-        $stmt = $this->conn->getConnection()->prepare("DELETE FROM $this->table_name WHERE u_id=?");
+        $stmt = $this->modelObje()->prepare("DELETE FROM $this->table_name WHERE u_id=?");
 
         $stmt->bindParam(1,$this->id);
 
@@ -54,21 +55,21 @@ class User{
     public function read()
     {
 
-        $stmt = $this->conn->getConnection()->query("SELECT * FROM $this->table_name");
+        $stmt = $this->modelObje()->query("SELECT * FROM $this->table_name");
         return $stmt;
     }
 
 
 
 
-    function update($user){
+    function update($id,$fname,$lname){
 
-        $this->id=$user[0];
-        $this->fname = $user[1];
-        $this->lname = $user[2];
+        $this->id=$id;
+        $this->fname = $fname[1];
+        $this->lname = $lname[2];
 
 
-        $stmt = $this->conn->getConnection()->prepare( "UPDATE $this->table_name SET fname = ?, lname=? WHERE u_id= ?");
+        $stmt = $this->modelObje()->prepare( "UPDATE $this->table_name SET fname = ?, lname=? WHERE u_id= ?");
 
         $stmt->bindParam(1,$this->fname);
         $stmt->bindParam(2,$this->lname);
@@ -83,5 +84,6 @@ class User{
 
 
 }
+
 
 ?>
